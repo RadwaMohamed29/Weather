@@ -6,4 +6,12 @@
     <string name="fav">Favorite</string>
     <string name="alerts">Alerts</string>
     <string name="setting">Settings</string>
+    <string name="txt_weather">weather</string>
+    <string name="txt_degree">degree</string>
+    <string name="txt_day">day</string>
+    <string name="txt_cloud">cloud</string>
+    <string name="cloud">Cloud</string>
+    <string name="wind">Wind</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
 </resources>
