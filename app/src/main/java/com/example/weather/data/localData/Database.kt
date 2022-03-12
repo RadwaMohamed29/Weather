@@ -1,35 +1,34 @@
 package com.example.weather.data.localData
 
 import android.app.Application
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.weather.model.WeatherApi
 
-@androidx.room.Database(entities = arrayOf(WeatherApi::class),version = 1,exportSchema = false)
+@Database(entities = arrayOf(WeatherApi::class), version = 1, exportSchema = false)
 @TypeConverters(Converter::class)
-abstract class Database : RoomDatabase() {
-    abstract fun dao():Dao
-    companion object{
+public abstract class DataBase : RoomDatabase() {
+    abstract fun dao(): Dao
+    companion object {
+        @Volatile
+        private var INSTANCE: DataBase? = null
+        fun getWeatherDatabase(application: Application): DataBase {
+            return INSTANCE ?: synchronized(this) {
 
-        private var INSTANCE:Database?=null
-        fun getWeatherDatabase(app:Application):Database?{
-            return INSTANCE?: synchronized(this){
-
-                val instance=Room.databaseBuilder(app.applicationContext
-                    ,Database::class.java
-                    ,"weather name")
-                    .build()
-                INSTANCE=instance
+                val instance = Room.databaseBuilder(
+                    application.applicationContext,
+                    DataBase::class.java,
+                    "weather_database"
+                ).build()
+                INSTANCE = instance
+                // return instance
                 instance
             }
-
-
-
         }
-
-
     }
 
-
 }
+
+

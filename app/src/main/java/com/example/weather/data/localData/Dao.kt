@@ -12,13 +12,16 @@ interface Dao {
     fun getAllWeathers():LiveData<List<WeatherApi>>
 
     @Query("DELETE FROM Weather")
-    suspend fun delete()
+    suspend fun deleteAll(weather: WeatherApi)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(weather:WeatherApi)
 
     @Query("SELECT * FROM Weather WHERE lat=:lat AND lon=:lon")
-    fun getWeatherApi(lat:String,lon:String):LiveData<WeatherApi>
+    fun getWeatherApi(lat:String,lon:String):WeatherApi
+
+    @Query("DELETE FROM Weather WHERE lat=:lat AND lon=:lon")
+    suspend fun deleteWeather(lat:String,lon:String)
 
 
 }

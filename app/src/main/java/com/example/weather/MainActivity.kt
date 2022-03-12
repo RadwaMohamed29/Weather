@@ -1,7 +1,9 @@
 package com.example.weather
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
@@ -18,12 +20,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //val toolBar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolBar)
+       // val toolBar=findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolBar)
         val bottom_nav=findViewById<BottomNavigationView>(R.id.bottom_nav)
-       // setSupportActionBar(toolBar)
+       //setSupportActionBar(toolBar)
         navController=Navigation.findNavController(this,R.id.nav_host_fragment_container)
         bottom_nav.setupWithNavController(navController)
-       // NavigationUI.setupActionBarWithNavController(this,navController)
+        //NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
