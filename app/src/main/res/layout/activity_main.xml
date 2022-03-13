@@ -27,7 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
+        android:elevation="0dp"
         android:background="@color/background"
-        app:backgroundTint="@color/white"
+        android:backgroundTint="@android:color/transparent"
+        app:itemBackground="@color/white"
+        app:itemTextColor="@color/white"
+
         />
 </LinearLayout>

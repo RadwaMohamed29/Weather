@@ -9,7 +9,7 @@ import com.example.weather.model.WeatherApi
 
 @Database(entities = arrayOf(WeatherApi::class), version = 1, exportSchema = false)
 @TypeConverters(Converter::class)
-public abstract class DataBase : RoomDatabase() {
+ abstract class DataBase : RoomDatabase() {
     abstract fun dao(): Dao
     companion object {
         @Volatile
@@ -20,10 +20,9 @@ public abstract class DataBase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     application.applicationContext,
                     DataBase::class.java,
-                    "weather_database"
+                    "weather"
                 ).build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

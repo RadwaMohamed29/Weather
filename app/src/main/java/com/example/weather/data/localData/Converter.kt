@@ -9,28 +9,31 @@ import com.google.gson.Gson
 
 class Converter {
     @TypeConverter
-    fun hourToJson(hour:List<Hourly>?)=Gson().toJson(hour)
-    @TypeConverter
-    fun jsonToHour(hour: String) = Gson().fromJson(hour, Array<Hourly>::class.java)?.toList()
+    fun listHourlyTojson(value: List<Hourly>) = Gson().toJson(value)
 
     @TypeConverter
-    fun dayToJson(day:List<Daily>?)=Gson().toJson(day)
-    @TypeConverter
-    fun jsonToDay(day:String)=Gson().fromJson(day,Array<Daily>::class.java)?.toList()
+    fun listDailyToJson(value: List<Daily>) = Gson().toJson(value)
 
     @TypeConverter
-    fun alertToJson(alert:List<Alerts>?)=Gson().toJson(alert)
+    fun jsonToHourlyList(value: String) = Gson().fromJson(value, Array<Hourly>::class.java).toList()
+
     @TypeConverter
-    fun jsonToAlert(alert:String?):List<Alerts>?{
-        alert?.let {
-            return Gson().fromJson(alert,Array<Alerts>::class.java)?.toList()
+    fun jsonToDailyList(value: String) = Gson().fromJson(value, Array<Daily>::class.java).toList()
+
+    @TypeConverter
+    fun listWeatherToJson(value: List<Weather>) = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonTolistWeather(value: String) = Gson().fromJson(value, Array<Weather>::class.java).toList()
+
+    @TypeConverter
+    fun  listAlertToJson (value:List<Alerts>?) = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonToAlertList(value: String?): List<Alerts>? {
+        value?.let {
+            return Gson().fromJson(value, Array<Alerts>::class.java)?.toList()
         }
         return emptyList()
-
     }
-
-    @TypeConverter
-    fun weatherToJson(weather:List<Weather>)=Gson().toJson(weather)
-    @TypeConverter
-    fun jsonToWeather(weather:String)=Gson().fromJson(weather,Array<Weather>::class.java)?.toList()
 }

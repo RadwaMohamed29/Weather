@@ -12,8 +12,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.weather.R
 import com.example.weather.databinding.FragmentSplashBinding
-import com.example.weather.ui.home.HomeFragment
 import kotlinx.coroutines.*
+import com.example.weather.ui.home.view.HomeFragment
 
 class SplashFragment : Fragment() {
     val activityScope= CoroutineScope(Dispatchers.Main)

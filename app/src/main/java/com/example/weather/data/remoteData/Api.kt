@@ -1,4 +1,4 @@
-package com.example.weather.data.remoreData
+package com.example.weather.data.remoteData
 
 import com.example.weather.model.WeatherApi
 import retrofit2.Response
@@ -16,4 +16,5 @@ interface Api {
         @Query("lang") lang:String,
         @Query("appid") appId:String= appid
     ):Response<WeatherApi>
+
 }

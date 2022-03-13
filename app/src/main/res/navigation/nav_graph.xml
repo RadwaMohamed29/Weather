@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment2"
-        android:name="com.example.weather.ui.home.HomeFragment"
+        android:name="com.example.weather.ui.home.view.HomeFragment"
         android:label="HomeFragment" />
     <fragment
         android:id="@+id/alertsFragment"

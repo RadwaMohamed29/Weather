@@ -4,56 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".ui.home.view.HomeFragment">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:elevation="25dp"
-            android:indeterminate="true"
-            android:indeterminateBehavior="cycle"
-            android:visibility="gone"
-            app:indicatorColor="#E6B70D"
-            app:trackColor="@color/black" />
 
         <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp"
             android:elevation="15dp"
-            android:fontFamily="cursive"
             android:padding="10dp"
             android:text="city name"
-            android:textColor="@color/black"
-            android:textSize="48sp"
-            android:textStyle="bold" />
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/temp_container"
-            android:layout_width="230dp"
+            android:layout_width="270dp"
             android:layout_height="230dp"
-            android:layout_below="@+id/city_name"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="-30dp"
+            android:elevation="10dp"
             app:cardCornerRadius="10dp"
-            android:elevation="10dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/city_name">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/card"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:background="@drawable/bg"
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txt_condition"
@@ -93,28 +85,58 @@
             android:id="@+id/img_show_condition"
             android:layout_width="151dp"
             android:layout_height="127dp"
-            android:layout_below="@+id/temp_container"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="-50dp"
             android:elevation="20dp"
             android:src="@drawable/ic_launcher_background"
-            android:translationZ="@dimen/cardview_default_elevation" />
+            android:translationZ="@dimen/cardview_default_elevation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/temp_container" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_itemDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/background"
+            android:background="@color/background"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_show_condition"
+            tools:listitem="@layout/custom_row_day" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_itemWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rc_itemDay"
+            tools:listitem="@layout/custom_row_week" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/item_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/img_show_condition"
-            android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="30dp"
-            android:elevation="20dp">
+            android:layout_margin="20dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            android:elevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rc_itemWeek">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/bg"
-                >
+                android:background="@color/card"
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -127,9 +149,8 @@
                         android:layout_width="64dp"
                         android:layout_height="33dp"
                         android:layout_marginStart="16dp"
-                        android:src="@drawable/ic_air_white_24dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.174"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_cloud_white_24dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,7 +158,7 @@
                         android:id="@+id/img_wind"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="68dp"
+                        android:layout_marginStart="54dp"
                         android:src="@drawable/ic_air_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_cloud"
                         app:layout_constraintStart_toEndOf="@+id/img_cloud"
@@ -149,7 +170,7 @@
                         android:layout_width="64dp"
                         android:layout_height="33dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/ic_air_white_24dp"
+                        android:src="@drawable/ic_baseline_av_timer_24"
                         app:layout_constraintEnd_toEndOf="@+id/textView"
                         app:layout_constraintHorizontal_bias="0.687"
                         app:layout_constraintStart_toStartOf="@+id/textView"
@@ -159,12 +180,35 @@
                         android:id="@+id/img_Humidity"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="68dp"
+                        android:layout_marginStart="54dp"
                         android:layout_marginTop="8dp"
-                        android:src="@drawable/ic_air_white_24dp"
+                        android:src="@drawable/ic_water_drop_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_Pressure"
                         app:layout_constraintStart_toEndOf="@+id/img_Pressure"
                         app:layout_constraintTop_toTopOf="@+id/img_Pressure"
+                        app:layout_constraintVertical_bias="1.0" />
+                    <ImageView
+                        android:id="@+id/img_Violet"
+                        android:layout_width="64dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="54dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_coronavirus_white_24dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_Humidity"
+                        app:layout_constraintStart_toEndOf="@+id/img_Humidity"
+                        app:layout_constraintTop_toTopOf="@+id/img_Humidity"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <ImageView
+                        android:id="@+id/img_visibility"
+                        android:layout_width="64dp"
+                        android:layout_height="33dp"
+                        android:layout_marginStart="54dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_visibility_white_24dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_wind"
+                        app:layout_constraintStart_toEndOf="@+id/img_wind"
+                        app:layout_constraintTop_toTopOf="@+id/img_wind"
                         app:layout_constraintVertical_bias="1.0" />
 
                     <TextView
@@ -178,6 +222,17 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/img_wind"
                         app:layout_constraintTop_toBottomOf="@+id/img_wind" />
+                    <TextView
+                        android:id="@+id/txt_visibility"
+                        android:layout_width="78dp"
+                        android:layout_height="27dp"
+                        android:gravity="center"
+                        android:hint="@string/txt_weather"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="@+id/img_visibility"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/img_visibility"
+                        app:layout_constraintTop_toBottomOf="@+id/img_visibility" />
 
                     <TextView
                         android:id="@+id/txt_Pressure"
@@ -201,6 +256,17 @@
                         app:layout_constraintHorizontal_bias="0.25"
                         app:layout_constraintStart_toStartOf="@+id/img_Humidity"
                         app:layout_constraintTop_toBottomOf="@+id/img_Humidity" />
+                    <TextView
+                        android:id="@+id/txt_Violet"
+                        android:layout_width="80dp"
+                        android:layout_height="39dp"
+                        android:gravity="center"
+                        android:hint="@string/txt_degree"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="@+id/img_Violet"
+                        app:layout_constraintHorizontal_bias="0.25"
+                        app:layout_constraintStart_toStartOf="@+id/img_Violet"
+                        app:layout_constraintTop_toBottomOf="@+id/img_Violet" />
 
                     <TextView
                         android:id="@+id/txt_cloud"
@@ -221,7 +287,7 @@
                         android:gravity="center"
                         android:text="@string/cloud"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/txt_cloud"
                         app:layout_constraintHorizontal_bias="0.523"
                         app:layout_constraintStart_toStartOf="@+id/txt_cloud"
@@ -234,11 +300,23 @@
                         android:gravity="center"
                         android:text="@string/wind"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/txt_weather"
                         app:layout_constraintHorizontal_bias="0.272"
                         app:layout_constraintStart_toStartOf="@+id/txt_weather"
                         app:layout_constraintTop_toBottomOf="@+id/txt_weather" />
+                    <TextView
+                        android:id="@+id/vis"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/visibility"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txt_visibility"
+                        app:layout_constraintHorizontal_bias="0.272"
+                        app:layout_constraintStart_toStartOf="@+id/txt_visibility"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_visibility" />
 
                     <TextView
                         android:layout_width="80dp"
@@ -246,10 +324,20 @@
                         android:gravity="center"
                         android:text="@string/humidity"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/txt_Humidity"
                         app:layout_constraintStart_toStartOf="@+id/txt_Humidity"
                         app:layout_constraintTop_toBottomOf="@+id/txt_Humidity" />
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/violet"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="@+id/txt_Violet"
+                        app:layout_constraintStart_toStartOf="@+id/txt_Violet"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_Violet" />
 
                     <TextView
                         android:layout_width="80dp"
@@ -257,7 +345,7 @@
                         android:gravity="center"
                         android:text="@string/pressure"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         app:layout_constraintEnd_toEndOf="@+id/txt_Pressure"
                         app:layout_constraintStart_toStartOf="@+id/txt_Pressure"
                         app:layout_constraintTop_toBottomOf="@+id/txt_Pressure" />
@@ -270,40 +358,7 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/item_box"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="next 24hr forecast>>"
-            android:textColor="#0C24BA"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_itemDay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/item_box"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/custom_row_day" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_itemWeek"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rc_itemDay"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/custom_row_week" />
-
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
