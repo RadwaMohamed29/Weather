@@ -16,9 +16,9 @@ class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
         weatherApi?.let { dao.insert(it) }
     }
 
-//    override suspend fun deleteWeather(timezone: String) {
-//        dao.deleteWeather(timezone)
-//    }
+    override fun deleteWeather(timezone: String) {
+        dao.deleteWeather(timezone)
+    }
 
     override fun update(weatherApi: WeatherApi?) {
         weatherApi?.let { dao.update(it) }

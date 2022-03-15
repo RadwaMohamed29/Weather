@@ -9,6 +9,10 @@ interface Dao {
     @Query("SELECT * FROM Weather")
     fun getAllWeathers():LiveData<List<WeatherApi>>
 
+
+    @Query("SELECT * FROM Weather")
+    fun getAllData(): List<WeatherApi>
+
 //    @Query("DELETE FROM Weather")
 //    suspend fun deleteAll(weather: WeatherApi)
 
@@ -18,8 +22,11 @@ interface Dao {
     @Query("SELECT * FROM Weather WHERE timezone=:timezone")
     fun getWeatherApi(timezone:String):WeatherApi
 
-//    @Query("DELETE FROM Weather WHERE timezone=:timezone")
-//    suspend fun deleteWeather(timezone: String)
+    @Query("SELECT * FROM Weather WHERE lat=:lat AND lon=:lon")
+    fun getByLatLon(lat:String,lon:String):WeatherApi
+
+    @Query("DELETE FROM Weather WHERE timezone=:timezone")
+     fun deleteWeather(timezone: String)
 
     @Update
     fun update(weather: WeatherApi)

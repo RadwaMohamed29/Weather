@@ -25,10 +25,27 @@
         tools:layout="@layout/fragment_alerts" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.weather.ui.favorite.FavoriteFragment"
-        android:label="FavoriteFragment" />
+        android:name="com.example.weather.ui.favorite.view.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_homeFragment22"
+            app:destination="@id/homeFragment2" />
+        <argument
+            android:name="weather"
+            app:argType="com.example.weather.model.WeatherApi"
+            app:nullable="true" />
+
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.weather.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.weather.ui.map.view.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

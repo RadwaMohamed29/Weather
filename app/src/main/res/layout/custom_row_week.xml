@@ -8,6 +8,7 @@
     app:cardCornerRadius="40dp"
     android:padding="10dp"
     android:elevation="10dp"
+    android:backgroundTint="@android:color/transparent"
     card_view:cardBackgroundColor="@android:color/transparent"
     card_view:cardElevation="0dp"
     >

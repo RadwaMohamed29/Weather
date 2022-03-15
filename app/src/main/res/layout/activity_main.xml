@@ -27,11 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_navigation_menu"
-        android:elevation="0dp"
-        android:background="@color/background"
-        android:backgroundTint="@android:color/transparent"
-        app:itemBackground="@color/white"
-        app:itemTextColor="@color/white"
+        android:backgroundTint="@color/card"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:itemBackground="@color/card"
+        app:itemTextColor="@color/teal_200"/>
 
-        />
+
+
 </LinearLayout>

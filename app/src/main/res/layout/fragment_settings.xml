@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:weightSum="4"
     tools:context=".ui.settings.SettingsFragment"
-    android:background="@color/background">
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,40 +35,42 @@
 
                 <TextView
                     android:id="@+id/txtlang"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_width="307dp"
+                    android:layout_height="38dp"
                     android:gravity="center"
                     android:text="@string/location"
-                    android:textSize="20dp"
                     android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toTopOf="@id/radio_button_map"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.8"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/radio_button_map"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <RadioButton
                     android:id="@+id/radio_button_gps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/gps"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="@+id/radio_button_map"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/radio_button_map"
-                    app:layout_constraintTop_toBottomOf="@+id/radio_button_map"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@+id/radio_button_map" />
 
                 <RadioButton
                     android:id="@+id/radio_button_map"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:shadowColor="@color/teal_200"
                     android:text="@string/map"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtlang"
-                    app:layout_constraintBottom_toTopOf="@id/radio_button_gps"/>
+                    app:layout_constraintStart_toStartOf="@+id/txtlang"
+                    app:layout_constraintTop_toBottomOf="@+id/txtlang" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,6 +121,8 @@
                     android:id="@+id/radio_button_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/arabic"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/radio_button_5"
@@ -129,9 +133,11 @@
                     android:id="@+id/radio_button_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:enabled="true"
-                    android:textColor="@color/white"
                     android:text="@string/english"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/textlang"
                     app:layout_constraintStart_toStartOf="@+id/textlang"
                     app:layout_constraintTop_toBottomOf="@+id/textlang" />
@@ -185,29 +191,33 @@
                     android:id="@+id/radio_button_1"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/kelvin"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/radio_button_2"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/radio_button_2"
-                    app:layout_constraintTop_toBottomOf="@+id/radio_button_2"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@+id/radio_button_2" />
 
                 <RadioButton
                     android:id="@+id/radio_button_2"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:textColor="@color/white"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/celsius"
+                    android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/radio_button_3"
                     app:layout_constraintStart_toStartOf="@+id/radio_button_3"
-                    app:layout_constraintTop_toBottomOf="@+id/radio_button_3"
-                    app:layout_constraintBottom_toTopOf="@id/radio_button_1"/>
+                    app:layout_constraintTop_toBottomOf="@+id/radio_button_3" />
 
                 <RadioButton
                     android:id="@+id/radio_button_3"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/fahrenheit"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/text"
@@ -260,6 +270,8 @@
                     android:id="@+id/radio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/miles_hour"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/radio0"
@@ -270,6 +282,8 @@
                     android:id="@+id/radio0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:enabled="true"
                     android:text="@string/meter_sec"
                     android:textColor="@color/white"

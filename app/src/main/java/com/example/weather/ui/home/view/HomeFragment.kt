@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
@@ -20,12 +22,14 @@ import com.example.weather.model.Hourly
 import com.example.weather.model.Repository
 import com.example.weather.ui.home.viewModel.HomeViewModel
 import com.example.weather.ui.home.viewModel.HomeViewModelFactory
+import com.example.weather.util.LocationByGps
 import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
-    private lateinit var hourly:List<Hourly>
-    private lateinit var daily:List<Daily>
+    private  var gps:LocationByGps= LocationByGps()
+    lateinit var navController: NavController
     private val viewModel:HomeViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(Repository.getInstance(requireActivity().application))
     }
@@ -37,28 +41,19 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        gps.findDeviceLocation(requireActivity())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val linearLayoutManager=LinearLayoutManager(this.context)
-//        linearLayoutManager.orientation=RecyclerView.HORIZONTAL
-        hourly= emptyList()
-        daily= emptyList()
-        binding.rcItemDay.layoutManager=LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
-        binding.rcItemDay.hasFixedSize()
-        val dayAdapter= context?.let { DayAdapter(hourly , it) }
-        binding.rcItemDay.adapter=dayAdapter
+        navController=Navigation.findNavController(view)
+       // 30.5965, 32.2715
 
-        binding.rcItemWeek.layoutManager=LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-        binding.rcItemWeek.hasFixedSize()
-        val weekAdapter= context?.let { WeekAdapter(daily, it) }
-        binding.rcItemWeek.adapter=weekAdapter
-        Log.i("radwa", weekAdapter.toString())
-
-        viewModel.insertData("29.969", "32.547","minutely", "metric", "en")
+       viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", "metric", "en")
+       // viewModel.insertData("30.5965", "32.2715","minutely", "metric", "en")
         viewModel.weatherApi.observe(viewLifecycleOwner){
-            binding.cityName.text=getCityName(29.969,32.547)
+           binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
+            //binding.cityName.text=getCityName(30.5965, 32.2715)
             binding.tempTxt.text=it.current.temp.toString()
             binding.txtCondition.text=it.current.weather[0].description
             binding.txtCloud.text=it.current.clouds.toString()
@@ -70,9 +65,27 @@ class HomeFragment : Fragment() {
             binding.imgShowCondition.setImageResource(getIcon(it.current.weather[0].icon))
             binding.tempTxt.text=it.current.temp.toInt().toString()+"°"
             binding.tempFeel.text=it.current.feels_like.toString()
+            binding.rcItemDay.layoutManager=LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+            binding.rcItemDay.hasFixedSize()
+            val dayAdapter= DayAdapter(arrayListOf())
+            dayAdapter.updateHourly(it.hourly)
+            binding.rcItemDay.adapter=dayAdapter
+
+            binding.rcItemWeek.layoutManager=LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+            binding.rcItemWeek.hasFixedSize()
+            val weekAdapter= WeekAdapter(arrayListOf(),context)
+            weekAdapter.updateDaily(it.daily)
+            binding.rcItemWeek.adapter=weekAdapter
+            binding.backBtn.setOnClickListener{
+                navController.popBackStack()
+
+            }
+
 
         }
     }
+
+
     fun getIcon(icon:String):Int{
         when (icon){
             "01n"->{return R.drawable.a01n}
@@ -99,7 +112,7 @@ class HomeFragment : Fragment() {
         var city = "Unknown!"
         val geocoder = Geocoder(requireContext(), Locale("en"))
         val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
-        Log.i("ziny", "getCityText: $lat + $lon + $addresses")
+        Log.i("location", "getCityText: $lat + $lon + $addresses")
         if (addresses.isNotEmpty()) {
             val state = addresses[0].adminArea // damietta
             val country = addresses[0].countryName

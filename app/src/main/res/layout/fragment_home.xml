@@ -10,7 +10,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@drawable/background">
 
 
         <TextView
@@ -41,8 +41,8 @@
             app:layout_constraintTop_toBottomOf="@+id/city_name">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="273dp"
+                android:layout_height="225dp"
                 android:background="@color/card"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -84,8 +84,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_show_condition"
             android:layout_width="151dp"
-            android:layout_height="127dp"
-            android:layout_marginTop="-50dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="-70dp"
             android:elevation="20dp"
             android:src="@drawable/ic_launcher_background"
             android:translationZ="@dimen/cardview_default_elevation"
@@ -99,13 +99,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            android:backgroundTint="@color/background"
-            android:background="@color/background"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_show_condition"
-            tools:listitem="@layout/custom_row_day" />
+            tools:listitem="@layout/custom_row_day"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_itemWeek"
@@ -158,7 +157,7 @@
                         android:id="@+id/img_wind"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="54dp"
+                        android:layout_marginStart="50dp"
                         android:src="@drawable/ic_air_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_cloud"
                         app:layout_constraintStart_toEndOf="@+id/img_cloud"
@@ -180,7 +179,7 @@
                         android:id="@+id/img_Humidity"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="54dp"
+                        android:layout_marginStart="50dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_water_drop_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_Pressure"
@@ -191,7 +190,7 @@
                         android:id="@+id/img_Violet"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="54dp"
+                        android:layout_marginStart="50dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_coronavirus_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_Humidity"
@@ -203,7 +202,7 @@
                         android:id="@+id/img_visibility"
                         android:layout_width="64dp"
                         android:layout_height="33dp"
-                        android:layout_marginStart="54dp"
+                        android:layout_marginStart="50dp"
                         android:layout_marginTop="8dp"
                         android:src="@drawable/ic_visibility_white_24dp"
                         app:layout_constraintBottom_toBottomOf="@+id/img_wind"
@@ -219,9 +218,9 @@
                         android:hint="@string/txt_weather"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="@+id/img_wind"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/img_wind"
                         app:layout_constraintTop_toBottomOf="@+id/img_wind" />
+
                     <TextView
                         android:id="@+id/txt_visibility"
                         android:layout_width="78dp"
@@ -230,7 +229,6 @@
                         android:hint="@string/txt_weather"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="@+id/img_visibility"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/img_visibility"
                         app:layout_constraintTop_toBottomOf="@+id/img_visibility" />
 
@@ -253,9 +251,9 @@
                         android:hint="@string/txt_degree"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="@+id/img_Humidity"
-                        app:layout_constraintHorizontal_bias="0.25"
                         app:layout_constraintStart_toStartOf="@+id/img_Humidity"
                         app:layout_constraintTop_toBottomOf="@+id/img_Humidity" />
+
                     <TextView
                         android:id="@+id/txt_Violet"
                         android:layout_width="80dp"
@@ -264,7 +262,6 @@
                         android:hint="@string/txt_degree"
                         android:textColor="@color/white"
                         app:layout_constraintEnd_toEndOf="@+id/img_Violet"
-                        app:layout_constraintHorizontal_bias="0.25"
                         app:layout_constraintStart_toStartOf="@+id/img_Violet"
                         app:layout_constraintTop_toBottomOf="@+id/img_Violet" />
 
@@ -357,6 +354,17 @@
 
 
         </com.google.android.material.card.MaterialCardView>
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="39dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/ic_arrow_back_white_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
