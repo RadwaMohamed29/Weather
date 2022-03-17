@@ -29,11 +29,12 @@
     <string name="language">Language</string>
     <string name="arabic">Arabic</string>
     <string name="english">English</string>
-    <string name="temperature">Temperature</string>
-    <string name="kelvin">Kelvin</string>
-    <string name="celsius">Celsius</string>
-    <string name="fahrenheit">Fahrenheit</string>
+    <string name="temperature">Temperature and Wind Speed</string>
+    <string name="kelvin">temp(°k) , WS(m/s)</string>
+    <string name="celsius">temp(°c) , WS(m/s)</string>
+    <string name="fahrenheit">temp(°f) , WS(ml/h)</string>
     <string name="wind_speed">Wind Speed</string>
     <string name="miles_hour">M/h</string>
     <string name="meter_sec">M/S</string>
+
 </resources>

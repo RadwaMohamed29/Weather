@@ -16,6 +16,10 @@ class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
         weatherApi?.let { dao.insert(it) }
     }
 
+    override fun getByLatLon(lat: String, lon: String): LiveData<List<WeatherApi>> {
+        return dao.getByLatLon(lat,lon)
+    }
+
     override fun deleteWeather(timezone: String) {
         dao.deleteWeather(timezone)
     }

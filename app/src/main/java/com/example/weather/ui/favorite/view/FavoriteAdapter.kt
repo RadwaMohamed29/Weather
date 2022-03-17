@@ -6,10 +6,12 @@ import android.location.Geocoder
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.example.weather.R
 import com.example.weather.databinding.CustomRowFavBinding
 import com.example.weather.model.WeatherApi
 import com.example.weather.ui.favorite.viewModel.FavViewModel
@@ -42,14 +44,17 @@ class FavoriteAdapter (var favList:ArrayList<WeatherApi>,context:Context,viewMod
         holder.item.deleteIcon.setOnClickListener{
             viewModel.deleteWeatherData(favList[position].timezone)
         }
+        Log.i("nuuull", " "+favList[position].lat +favList[position].lon)
+
         holder.item.favCard.setOnClickListener {
+            val bundle = bundleOf( "lat" to  favList[position].lat, "lon" to favList[position].lon)
             navController=Navigation.findNavController(it)
-            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToHomeFragment22())
+            navController.navigate(R.id.action_favoriteFragment_to_weatherDetailsFragment,bundle)
 
         }
     }
     private fun getCityName(lat: Double, lon: Double): String {
-        var city = "Unknown!"
+        var city = "suez"
         val geocoder = Geocoder(context, Locale("en"))
         val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
         Log.i("location", "getCityText: $lat + $lon + $addresses")

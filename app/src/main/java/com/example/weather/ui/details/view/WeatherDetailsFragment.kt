@@ -1,4 +1,4 @@
-package com.example.weather.ui.home.view
+package com.example.weather.ui.details.view
 
 import android.location.Address
 import android.location.Geocoder
@@ -9,52 +9,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.databinding.FragmentHomeBinding
-import com.example.weather.model.Daily
-import com.example.weather.model.Hourly
+import com.example.weather.databinding.FragmentWeatherDetailsBinding
 import com.example.weather.model.Repository
+import com.example.weather.ui.details.viewModel.DetailsViewModel
+import com.example.weather.ui.details.viewModel.DetailsViewModelFactory
+import com.example.weather.ui.favorite.viewModel.FavViewModel
+import com.example.weather.ui.home.view.DayAdapter
+import com.example.weather.ui.home.view.WeekAdapter
 import com.example.weather.ui.home.viewModel.HomeViewModel
 import com.example.weather.ui.home.viewModel.HomeViewModelFactory
-import com.example.weather.util.LocationByGps
 import java.util.*
-import kotlin.collections.ArrayList
+import kotlin.math.log
 
-class HomeFragment : Fragment() {
-    private lateinit var binding:FragmentHomeBinding
-    private  var gps:LocationByGps= LocationByGps()
+
+class WeatherDetailsFragment : Fragment() {
+    lateinit var binding: FragmentWeatherDetailsBinding
     lateinit var navController: NavController
-    private val viewModel:HomeViewModel by viewModels<HomeViewModel> {
-        HomeViewModelFactory(Repository.getInstance(requireActivity().application))
-    }
 
-    companion object{
-        fun newInstance()=HomeFragment()
+    private val viewModel: DetailsViewModel by viewModels<DetailsViewModel> {
+        DetailsViewModelFactory(Repository.getInstance(requireActivity().application))
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gps.findDeviceLocation(requireActivity())
+
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController=Navigation.findNavController(view)
-       // 30.5965, 32.2715
+        binding.backBtn.setOnClickListener{
+            navController.popBackStack()
+        }
+        val lat=requireArguments().getDouble("lat")
+        val lon=requireArguments().getDouble("lon")
+        //Log.i("maaaaaaaaaap", lat+" "+lon)
 
-       viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", "metric", "en")
-       // viewModel.insertData("30.5965", "32.2715","minutely", "metric", "en")
+        viewModel.insertData(lat.toString(), lon.toString(),"minutely", "metric", "en")
+
         viewModel.weatherApi.observe(viewLifecycleOwner){
-           binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
+            binding.cityName.text=getCityName(lat.toDouble(), lon.toDouble())
             //binding.cityName.text=getCityName(30.5965, 32.2715)
-            binding.tempTxt.text=it.current.temp.toString()
+            binding.cityName.text=getCityName(lat.toDouble(), lon.toDouble())
             binding.txtCondition.text=it.current.weather[0].description
             binding.txtCloud.text=it.current.clouds.toString()
             binding.txtWeather.text=it.current.wind_speed.toString()
@@ -65,13 +69,15 @@ class HomeFragment : Fragment() {
             binding.imgShowCondition.setImageResource(getIcon(it.current.weather[0].icon))
             binding.tempTxt.text=it.current.temp.toInt().toString()+"°"
             binding.tempFeel.text=it.current.feels_like.toString()
-            binding.rcItemDay.layoutManager=LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+            binding.rcItemDay.layoutManager=
+                LinearLayoutManager(context, RecyclerView.HORIZONTAL,false)
             binding.rcItemDay.hasFixedSize()
             val dayAdapter= DayAdapter(arrayListOf())
             dayAdapter.updateHourly(it.hourly)
             binding.rcItemDay.adapter=dayAdapter
 
-            binding.rcItemWeek.layoutManager=LinearLayoutManager(context,RecyclerView.VERTICAL,false)
+            binding.rcItemWeek.layoutManager=
+                LinearLayoutManager(context, RecyclerView.VERTICAL,false)
             binding.rcItemWeek.hasFixedSize()
             val weekAdapter= WeekAdapter(arrayListOf(),context)
             weekAdapter.updateDaily(it.daily)
@@ -79,9 +85,8 @@ class HomeFragment : Fragment() {
 
 
         }
+
     }
-
-
     fun getIcon(icon:String):Int{
         when (icon){
             "01n"->{return R.drawable.a01n}
@@ -117,11 +122,12 @@ class HomeFragment : Fragment() {
         return city
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding= FragmentHomeBinding.inflate(inflater,container,false)
+        binding= FragmentWeatherDetailsBinding.inflate(inflater,container,false)
         return binding.root
     }
 

@@ -23,7 +23,7 @@ interface Dao {
     fun getWeatherApi(timezone:String):WeatherApi
 
     @Query("SELECT * FROM Weather WHERE lat=:lat AND lon=:lon")
-    fun getByLatLon(lat:String,lon:String):WeatherApi
+    fun getByLatLon(lat:String,lon:String):LiveData<List<WeatherApi>>
 
     @Query("DELETE FROM Weather WHERE timezone=:timezone")
      fun deleteWeather(timezone: String)

@@ -68,15 +68,17 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
             }
         }
     }
-//    fun getByLatLon(lat:String,lon:String){
+//    lateinit var getWeather:LiveData<List<WeatherApi>>
+//    fun getByLatLon(lat:String,lon:String): LiveData<List<WeatherApi>>{
 //        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
 //            throwable.printStackTrace()
 //            Log.i("id", "exception")
 //        }
 //        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
-//            localData.getByLatLon(lat,lon)
+//          getWeather=localData.getByLatLon(lat,lon)
 //
 //        }
+//        return getWeather
 //    }
 
 

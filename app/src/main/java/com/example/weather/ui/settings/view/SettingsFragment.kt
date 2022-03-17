@@ -1,4 +1,4 @@
-package com.example.weather.ui.settings
+package com.example.weather.ui.settings.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,5 +1,6 @@
 package com.example.weather.model
 
+import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -19,7 +20,7 @@ data class WeatherApi (
     @SerializedName("hourly") val hourly : List<Hourly>,
     @SerializedName("daily") val daily : List<Daily>,
     @SerializedName("alerts") val alerts : List<Alerts>?
-    ):Serializable
+    )
 
 data class Current (
     @SerializedName("dt") val dt : Int,

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:context=".ui.settings.SettingsFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="189dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="136dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="31dp"
+            tools:layout_editor_absoluteY="10dp">
+
+
+            <TextView
+                android:id="@+id/txtlang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/location"
+                android:textSize="20sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <RadioButton
+                android:id="@+id/radio_button_gps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gps"
+                app:layout_constraintEnd_toEndOf="@+id/radio_button_map"
+                app:layout_constraintStart_toStartOf="@+id/radio_button_map"
+                app:layout_constraintTop_toBottomOf="@+id/radio_button_map" />
+
+            <RadioButton
+                android:id="@+id/radio_button_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/map"
+                app:layout_constraintEnd_toEndOf="@+id/txtlang"
+                app:layout_constraintStart_toStartOf="@+id/txtlang"
+                app:layout_constraintTop_toBottomOf="@+id/txtlang" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="160dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="16dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
+        app:layout_constraintStart_toEndOf="@+id/materialCardView2"
+        app:layout_constraintTop_toTopOf="@+id/materialCardView2"
+        app:layout_constraintVertical_bias="1.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/textlang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/language"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radio_button_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/arabic"
+                app:layout_constraintEnd_toEndOf="@+id/radio_button_5"
+                app:layout_constraintStart_toStartOf="@+id/radio_button_5"
+                app:layout_constraintTop_toBottomOf="@+id/radio_button_5" />
+
+            <RadioButton
+                android:id="@+id/radio_button_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:text="@string/english"
+                app:layout_constraintEnd_toEndOf="@+id/textlang"
+                app:layout_constraintStart_toStartOf="@+id/textlang"
+                app:layout_constraintTop_toBottomOf="@+id/textlang" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView2"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/temperature"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radio_button_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kelvin"
+                app:layout_constraintEnd_toEndOf="@+id/radio_button_2"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/radio_button_2"
+                app:layout_constraintTop_toBottomOf="@+id/radio_button_2" />
+
+            <RadioButton
+                android:id="@+id/radio_button_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/celsius"
+                app:layout_constraintEnd_toEndOf="@+id/radio_button_3"
+                app:layout_constraintStart_toStartOf="@+id/radio_button_3"
+                app:layout_constraintTop_toBottomOf="@+id/radio_button_3" />
+
+            <RadioButton
+                android:id="@+id/radio_button_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fahrenheit"
+                app:layout_constraintEnd_toEndOf="@+id/text"
+                app:layout_constraintStart_toStartOf="@+id/text"
+                app:layout_constraintTop_toBottomOf="@+id/text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
