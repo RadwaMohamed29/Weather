@@ -20,8 +20,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        //navController= Navigation.findNavController()
-        //(requireActivity() as AppCompatActivity).supportActionBar?.hide()
         val exceptionHandlerException= CoroutineExceptionHandler{_,throwable->throwable.printStackTrace()
             Log.i("radwa", "exption")}
         activityScope.launch{
@@ -29,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
             var intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
-            //navController.navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment2())
+
 
         }
 

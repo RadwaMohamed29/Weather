@@ -12,14 +12,14 @@
         android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/card"
-        android:backgroundTint="@color/card"
+        android:background="@color/teal_200"
+        android:backgroundTint="@color/teal_200"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:padding="8dp"
         android:layout_margin="5dp"
-        android:text="@strings/save"
-        android:textColor="@color/teal_200" />
+        android:text="@string/save"
+        android:textColor="@color/white" />
 
 </fragment>
 
