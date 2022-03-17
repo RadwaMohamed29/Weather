@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">الرئيسية</string>
+    <string name="fav">المفضلة</string>
+    <string name="alerts">التنبيهات</string>
+    <string name="setting">الأعدادات</string>
+    <string name="txt_weather">الطقس</string>
+    <string name="txt_degree">درجة الحراره</string>
+    <string name="txt_day">اليوم</string>
+    <string name="txt_cloud">السحب</string>
+    <string name="cloud">السحب</string>
+    <string name="wind">الرياح</string>
+    <string name="humidity">الرطوبة</string>
+    <string name="pressure">الضغط</string>
+    <string name="Saturday">السبت</string>
+    <string name="Sunday">الأحد</string>
+    <string name="Monday">الأثنين</string>
+    <string name="Tuesday">الثلاثاء</string>
+    <string name="Wednesday">الأربعاء</string>
+    <string name="Friday">الجمعة</string>
+    <string name="Thursday">الخميس</string>
+    <string name="visibility">الرؤية</string>
+    <string name="violet">الأشعة فوق البنفسجية</string>
+    <string name="location">الموقع</string>
+    <string name="gps">تحديد المواقع</string>
+    <string name="map">خريطه</string>
+    <string name="language">اللغة</string>
+    <string name="arabic">العربية</string>
+    <string name="english">الأنجليزية</string>
+    <string name="temperature">درجة الحرارة و سرعة الرياح</string>
+    <string name="kelvin"> (متر/ثانيه) سرعةرياح , (°k)درجة</string>
+    <string name="celsius">(متر/ثانيه) سرعة رياح , (°c)درجة</string>
+    <string name="fahrenheit">(ميللى/ساعه) سرعة رياح , (°f)درجة</string>
+    <string name="wind_speed">سرعة الرياح</string>
+    <string name="miles_hour">ميللى/ساعه</string>
+    <string name="meter_sec">متر/ثانيه</string>
+    <string name="save">حفظ</string>
+</resources>

@@ -5,6 +5,7 @@ import com.example.weather.model.WeatherApi
 
 interface InterfaceLocalDataSource {
     fun getAllWeathers(): LiveData<List<WeatherApi>>
+    fun getAllData():List<WeatherApi>
     fun getWeatherApi(timezone:String): WeatherApi
     suspend fun insert(weatherApi: WeatherApi?)
     fun getByLatLon(lat:String,lon:String) :LiveData<List<WeatherApi>>

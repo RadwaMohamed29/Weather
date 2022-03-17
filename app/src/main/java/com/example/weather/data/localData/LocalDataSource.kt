@@ -8,6 +8,10 @@ class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
         return dao.getAllWeathers()
     }
 
+    override fun getAllData(): List<WeatherApi> {
+        return dao.getAllData()
+    }
+
     override fun getWeatherApi(timezone: String): WeatherApi {
         return dao.getWeatherApi(timezone)
     }

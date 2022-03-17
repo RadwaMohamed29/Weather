@@ -1,11 +1,13 @@
 package com.example.weather.ui.favorite.view
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.location.Address
 import android.location.Geocoder
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -21,12 +23,16 @@ import kotlin.collections.ArrayList
 class FavoriteAdapter (var favList:ArrayList<WeatherApi>,context:Context,viewModel:FavViewModel):RecyclerView.Adapter<FavoriteAdapter.FavViewHolder>(){
      var context: Context
      var viewModel:FavViewModel
+     var sharedPref: SharedPreferences
+     var lang: String
+     lateinit var geocoder: Geocoder
      lateinit var navController: NavController
     inner class FavViewHolder(var item :CustomRowFavBinding):RecyclerView.ViewHolder(item.root)
     init {
         this.context=context
         this.viewModel=viewModel
-
+        sharedPref = context.getSharedPreferences("weather", Context.MODE_PRIVATE)
+        lang=sharedPref.getString("lang","en").toString()
     }
 
     fun updateHours(newList:List<WeatherApi>){
@@ -54,8 +60,10 @@ class FavoriteAdapter (var favList:ArrayList<WeatherApi>,context:Context,viewMod
         }
     }
     private fun getCityName(lat: Double, lon: Double): String {
-        var city = "suez"
-        val geocoder = Geocoder(context, Locale("en"))
+        var city = "Unknown!"
+        if(lang.equals("en")){
+            geocoder = Geocoder(context, Locale("en"))
+        }else{ geocoder = Geocoder(context, Locale("ar")) }
         val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
         Log.i("location", "getCityText: $lat + $lon + $addresses")
         if (addresses.isNotEmpty()) {

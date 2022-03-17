@@ -51,6 +51,21 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
     override fun update(weatherApi: WeatherApi?) {
         return localData.update(weatherApi)
     }
+    fun updateDataBase() {
+
+        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
+            throwable.printStackTrace()
+            Log.i("id", "exception")
+        }
+        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
+            var list = localData.getAllData()
+            for (item in list!!) {
+                setData(item.lat.toString(), item.lon.toString())
+            }
+        }
+
+
+    }
     fun setData(lat: String, log: String) {
 
         val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
@@ -68,19 +83,6 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
             }
         }
     }
-//    lateinit var getWeather:LiveData<List<WeatherApi>>
-//    fun getByLatLon(lat:String,lon:String): LiveData<List<WeatherApi>>{
-//        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
-//            throwable.printStackTrace()
-//            Log.i("id", "exception")
-//        }
-//        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
-//          getWeather=localData.getByLatLon(lat,lon)
-//
-//        }
-//        return getWeather
-//    }
-
 
     fun deleteData(timezone: String?) {
         val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->

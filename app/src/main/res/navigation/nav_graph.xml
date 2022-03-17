@@ -3,24 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/homeFragment2">
 
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.weather.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_homeFragment2"
-            app:destination="@id/homeFragment2" />
-        <action
-            android:id="@+id/action_splashFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
-    </fragment>
     <fragment
         android:id="@+id/homeFragment2"
         android:name="com.example.weather.ui.home.view.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment2_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
     <fragment
         android:id="@+id/alertsFragment"
         android:name="com.example.weather.ui.alerts.AlertsFragment"
@@ -40,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.weather.ui.settings.SettingsFragment"
+        android:name="com.example.weather.ui.settings.view.SettingsFragment"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/mapsFragment"
@@ -52,4 +44,9 @@
         android:name="com.example.weather.ui.details.view.WeatherDetailsFragment"
         android:label="fragment_weather_details"
         tools:layout="@layout/fragment_weather_details" />
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="com.example.weather.ui.splash.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" />
 </navigation>

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Weather</string>
+    <string name="app_name" translatable="false">Weather</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="fav">Favorite</string>
     <string name="alerts">Alerts</string>
@@ -36,5 +36,6 @@
     <string name="wind_speed">Wind Speed</string>
     <string name="miles_hour">M/h</string>
     <string name="meter_sec">M/S</string>
+    <string name="save">Save</string>
 
 </resources>

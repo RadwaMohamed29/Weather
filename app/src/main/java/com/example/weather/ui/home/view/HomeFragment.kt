@@ -1,5 +1,9 @@
 package com.example.weather.ui.home.view
 
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -30,6 +34,13 @@ class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private  var gps:LocationByGps= LocationByGps()
     lateinit var navController: NavController
+    lateinit var sharedPref: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+    lateinit var lang: String
+    lateinit var unit: String
+    lateinit var tempUnit: String
+    lateinit var windSpeedUnit: String
+    lateinit var geocoder: Geocoder
     private val viewModel:HomeViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(Repository.getInstance(requireActivity().application))
     }
@@ -42,29 +53,54 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         gps.findDeviceLocation(requireActivity())
+        sharedPref = requireActivity().getSharedPreferences("weather", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        lang=sharedPref.getString("lang","en").toString()
+        unit=sharedPref.getString("units","metric").toString()
+        setLocale(lang)
+        setUnits(unit)
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController=Navigation.findNavController(view)
+
        // 30.5965, 32.2715
 
-       viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", "metric", "en")
+       viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", unit, lang)
        // viewModel.insertData("30.5965", "32.2715","minutely", "metric", "en")
         viewModel.weatherApi.observe(viewLifecycleOwner){
            binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
             //binding.cityName.text=getCityName(30.5965, 32.2715)
-            binding.tempTxt.text=it.current.temp.toString()
+            if (lang.equals("en")){
+                binding.tempTxt.text=it.current.temp.toString()
+                binding.txtCloud.text=it.current.clouds.toString()
+                binding.txtWeather.text=it.current.wind_speed.toString()
+                binding.txtPressure.text=it.current.pressure.toString()
+                binding.txtHumidity.text=it.current.humidity.toString()
+                binding.txtViolet.text=it.current.uvi.toString()
+                binding.txtVisibility.text=it.current.visibility.toString()
+                binding.tempTxt.text=it.current.temp.toInt().toString()+"°"
+                binding.tempFeel.text=it.current.feels_like.toString()
+
+            }else
+            {
+                binding.tempTxt.text=convertNumbersToArabic(it.current.temp.toInt())
+                binding.txtCloud.text=convertNumbersToArabic(it.current.clouds)
+                binding.txtWeather.text=convertNumbersToArabic(it.current.wind_speed.toInt())
+                binding.txtPressure.text=convertNumbersToArabic(it.current.pressure.toInt())
+                binding.txtHumidity.text=convertNumbersToArabic(it.current.humidity.toInt())
+                binding.txtViolet.text=convertNumbersToArabic(it.current.uvi.toInt())
+                binding.txtVisibility.text=convertNumbersToArabic(it.current.visibility.toInt())
+                binding.tempTxt.text=convertNumbersToArabic(it.current.temp.toInt())+"°"
+                binding.tempFeel.text=convertNumbersToArabic(it.current.feels_like.toInt())
+
+            }
+
             binding.txtCondition.text=it.current.weather[0].description
-            binding.txtCloud.text=it.current.clouds.toString()
-            binding.txtWeather.text=it.current.wind_speed.toString()
-            binding.txtPressure.text=it.current.pressure.toString()
-            binding.txtHumidity.text=it.current.humidity.toString()
-            binding.txtViolet.text=it.current.uvi.toString()
-            binding.txtVisibility.text=it.current.visibility.toString()
             binding.imgShowCondition.setImageResource(getIcon(it.current.weather[0].icon))
-            binding.tempTxt.text=it.current.temp.toInt().toString()+"°"
-            binding.tempFeel.text=it.current.feels_like.toString()
             binding.rcItemDay.layoutManager=LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
             binding.rcItemDay.hasFixedSize()
             val dayAdapter= DayAdapter(arrayListOf())
@@ -106,7 +142,9 @@ class HomeFragment : Fragment() {
     }
     private fun getCityName(lat: Double, lon: Double): String {
         var city = "Unknown!"
-        val geocoder = Geocoder(requireContext(), Locale("en"))
+        if(lang.equals("en")){
+             geocoder = Geocoder(requireContext(), Locale("en"))
+        }else{ geocoder = Geocoder(requireContext(), Locale("ar")) }
         val addresses: List<Address> = geocoder.getFromLocation(lat, lon, 1)
         Log.i("location", "getCityText: $lat + $lon + $addresses")
         if (addresses.isNotEmpty()) {
@@ -115,6 +153,41 @@ class HomeFragment : Fragment() {
             city = "$state, $country"
         }
         return city
+    }
+    fun convertNumbersToArabic(value: Int): String? {
+        return (value.toString() + "")
+            .replace("1", "١").replace("2", "٢")
+            .replace("3", "٣").replace("4", "٤")
+            .replace("5", "٥").replace("6", "٦")
+            .replace("7", "٧").replace("8", "٨")
+            .replace("9", "٩").replace("0", "٠")
+    }
+
+    fun setUnits(unit: String) {
+        when (unit) {
+            "metric" -> {
+                tempUnit = "°c"
+                windSpeedUnit = "m/s"
+            }
+            "imperial" -> {
+                tempUnit = "°f"
+                windSpeedUnit = "m/h"
+            }
+            "standard" -> {
+                tempUnit = "°k"
+                windSpeedUnit = "m/s"
+            }
+
+        }
+    }
+
+    fun setLocale(languageCode: String?) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = requireActivity().resources
+        val config: Configuration = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     override fun onCreateView(

@@ -18,7 +18,7 @@
         android:layout_alignParentEnd="true"
         android:padding="8dp"
         android:layout_margin="5dp"
-        android:text="save"
+        android:text="@strings/save"
         android:textColor="@color/teal_200" />
 
 </fragment>
