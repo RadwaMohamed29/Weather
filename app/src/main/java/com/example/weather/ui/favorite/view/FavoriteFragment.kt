@@ -37,15 +37,15 @@ class FavoriteFragment : Fragment() {
         viewModel =ViewModelProvider(this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         ).get(FavViewModel::class.java)
-        navController=Navigation.findNavController(view)
+        //navController=Navigation.findNavController(view)
         binding.addBtn.setOnClickListener{
-            navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToMapsFragment())
+            //navController.navigate(FavoriteFragmentDirections.actionFavoriteFragmentToMapsFragment())
+            Navigation.findNavController(view).navigate(R.id.action_favoriteFragment_to_mapsFragment)
         }
         binding.rcFavItem.layoutManager= LinearLayoutManager(context, RecyclerView.VERTICAL,false)
         binding.rcFavItem.hasFixedSize()
         favAdapter= FavoriteAdapter(arrayListOf(), requireContext(),viewModel)
         binding.rcFavItem.adapter=favAdapter
-
         viewModel.getAllWeathers().observe(viewLifecycleOwner,{
             favAdapter.updateHours(it)
         })

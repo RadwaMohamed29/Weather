@@ -27,18 +27,40 @@
             app:destination="@id/weatherDetailsFragment" />
         <action
             android:id="@+id/action_favoriteFragment_to_mapsFragment"
-            app:destination="@id/mapsFragment" />
+            app:destination="@id/mapsFragment" >
+
+        <argument
+            android:name="toMap"
+            app:argType="boolean"
+            android:defaultValue="true" />
+        </action>
+
 
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.weather.ui.settings.view.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" >
+            <argument
+                android:name="toMap"
+                app:argType="boolean"
+                android:defaultValue="false" />
+
+        </action>
+
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.weather.ui.map.view.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapsFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/weatherDetailsFragment"
         android:name="com.example.weather.ui.details.view.WeatherDetailsFragment"

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -38,9 +39,12 @@ class HomeFragment : Fragment() {
     lateinit var editor: SharedPreferences.Editor
     lateinit var lang: String
     lateinit var unit: String
+    lateinit var location:String
     lateinit var tempUnit: String
     lateinit var windSpeedUnit: String
     lateinit var geocoder: Geocoder
+    lateinit var lat:String
+    lateinit var lon:String
     private val viewModel:HomeViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(Repository.getInstance(requireActivity().application))
     }
@@ -57,23 +61,36 @@ class HomeFragment : Fragment() {
         editor = sharedPref.edit()
         lang=sharedPref.getString("lang","en").toString()
         unit=sharedPref.getString("units","metric").toString()
+        location=sharedPref.getString("location","GPS").toString()
+
+        lat = sharedPref?.getString("lat", "0").toString()
+        lon = sharedPref?.getString("lon", "0").toString()
+
         setLocale(lang)
         setUnits(unit)
-
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController=Navigation.findNavController(view)
-
        // 30.5965, 32.2715
+//        val lat=requireArguments().getString("lat")
+//        val lon=requireArguments().getString("lon")
+        Log.i("Locaation", "onViewCreated: "+lat+lon)
 
-       viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", unit, lang)
-       // viewModel.insertData("30.5965", "32.2715","minutely", "metric", "en")
+
+        if(lat.equals("0")||lon.equals("0")){
+            viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", unit, lang)
+        }else{
+            viewModel.insertData(lat, lon,"minutely", unit, lang)
+        }
         viewModel.weatherApi.observe(viewLifecycleOwner){
-           binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
-            //binding.cityName.text=getCityName(30.5965, 32.2715)
+            if(lat.equals("0")||lon.equals("0")){
+                binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
+            }else{
+                binding.cityName.text=getCityName(lat!!.toDouble(), lon!!.toDouble())
+            }
             if (lang.equals("en")){
                 binding.tempTxt.text=it.current.temp.toString()
                 binding.txtCloud.text=it.current.clouds.toString()

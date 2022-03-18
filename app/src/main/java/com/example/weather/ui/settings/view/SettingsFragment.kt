@@ -14,62 +14,74 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.weather.MainActivity
+import com.example.weather.R
 import com.example.weather.databinding.FragmentSettingsBinding
 import com.example.weather.ui.settings.viewModel.SettingViewModel
 import java.util.*
 
 
 class SettingsFragment : Fragment() {
-   lateinit var binding:FragmentSettingsBinding
-   lateinit var navController: NavController
-   lateinit var sharedPref:SharedPreferences
-   lateinit var editor:SharedPreferences.Editor
-   lateinit var viewModel:SettingViewModel
+    lateinit var binding: FragmentSettingsBinding
+    lateinit var sharedPref: SharedPreferences
+    lateinit var editor: SharedPreferences.Editor
+    lateinit var viewModel: SettingViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPref=requireActivity().getSharedPreferences("weather",Context.MODE_PRIVATE)
-        editor=sharedPref.edit()
-        viewModel=ViewModelProvider(this,
+        sharedPref = requireActivity().getSharedPreferences("weather", Context.MODE_PRIVATE)
+        editor = sharedPref.edit()
+        viewModel = ViewModelProvider(
+            this,
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-                ).get(SettingViewModel::class.java)
+        ).get(SettingViewModel::class.java)
 
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentSettingsBinding.inflate(inflater,container,false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var lang=sharedPref.getString("lang","en")
-        var unit=sharedPref.getString("units","metric")
-        when(lang){
-            "en"->binding.enBtn.isChecked=true
-            "ar"->binding.arBtn.isChecked=true
+        var lang = sharedPref.getString("lang", "en")
+        var unit = sharedPref.getString("units", "metric")
+        var location = sharedPref.getString("location", "GPS")
+        when (lang) {
+            "en" -> binding.enBtn.isChecked = true
+            "ar" -> binding.arBtn.isChecked = true
         }
-        when(unit){
-            "metric" -> binding.cM.isChecked=true
-            "imperial" -> binding.fMl.isChecked=true
-            "standard" -> binding.kM.isChecked=true
+        when (location) {
+            "GPS" -> binding.radioButtonGps.isChecked = true
+            "Map" -> binding.radioButtonMap.isChecked = true
+        }
+        when (unit) {
+            "metric" -> binding.cM.isChecked = true
+            "imperial" -> binding.fMl.isChecked = true
+            "standard" -> binding.kM.isChecked = true
         }
 
 
-        navController=Navigation.findNavController(view)
-        binding.arBtn.setOnClickListener{changeLang("ar")}
+       // navController = Navigation.findNavController(view)
+        binding.arBtn.setOnClickListener { changeLang("ar") }
         binding.enBtn.setOnClickListener { changeLang("en") }
-        binding.radioButtonMap.setOnClickListener {  }
-        binding.radioButtonGps.setOnClickListener {  }
+        binding.radioButtonGps.setOnClickListener { }
         binding.cM.setOnClickListener { changeUnit("metric") }
         binding.fMl.setOnClickListener { changeUnit("imperial") }
         binding.kM.setOnClickListener { changeUnit("standard") }
+        binding.radioButtonMap.setOnClickListener {
+            //navController.navigate(SettingsFragmentDirections.actionSettingsFragmentToMapsFragment())
+            Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_mapsFragment)
+        }
+
 
     }
+
     fun setLocale(languageCode: String?) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
@@ -78,22 +90,24 @@ class SettingsFragment : Fragment() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
     }
-    private fun changeUnit(unit:String){
-        editor.putString("units",unit)
+
+    private fun changeUnit(unit: String) {
+        editor.putString("units", unit)
         editor.commit()
         viewModel.updateData()
         restartApp()
     }
-    private fun restartApp()
-    {
+
+    private fun restartApp() {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         Runtime.getRuntime().exit(0)
 
     }
-    private fun changeLang(lang:String){
-        editor.putString("lang",lang)
+
+    private fun changeLang(lang: String) {
+        editor.putString("lang", lang)
         editor.commit()
         viewModel.updateData()
         setLocale(lang)
