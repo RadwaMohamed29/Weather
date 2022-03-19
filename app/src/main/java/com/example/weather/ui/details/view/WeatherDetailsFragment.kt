@@ -6,12 +6,14 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.location.Address
 import android.location.Geocoder
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -28,6 +30,7 @@ import com.example.weather.ui.home.view.DayAdapter
 import com.example.weather.ui.home.view.WeekAdapter
 import com.example.weather.ui.home.viewModel.HomeViewModel
 import com.example.weather.ui.home.viewModel.HomeViewModelFactory
+import com.example.weather.util.Notification
 import java.util.*
 import kotlin.math.log
 
@@ -58,11 +61,14 @@ class WeatherDetailsFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController=Navigation.findNavController(view)
         binding.backBtn.setOnClickListener{
             navController.popBackStack()
+
+
         }
         val lat=requireArguments().getDouble("lat")
         val lon=requireArguments().getDouble("lon")

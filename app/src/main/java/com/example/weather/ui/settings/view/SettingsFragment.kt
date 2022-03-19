@@ -70,7 +70,8 @@ class SettingsFragment : Fragment() {
        // navController = Navigation.findNavController(view)
         binding.arBtn.setOnClickListener { changeLang("ar") }
         binding.enBtn.setOnClickListener { changeLang("en") }
-        binding.radioButtonGps.setOnClickListener { }
+        binding.radioButtonGps.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_homeFragment2)}
         binding.cM.setOnClickListener { changeUnit("metric") }
         binding.fMl.setOnClickListener { changeUnit("imperial") }
         binding.kM.setOnClickListener { changeUnit("standard") }

@@ -32,6 +32,7 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
         return localData.getAllWeathers()
     }
 
+
     override fun getWeatherApi(timezone:String): WeatherApi {
         return localData.getWeatherApi(timezone)
     }
@@ -83,6 +84,23 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
             }
         }
     }
+//    fun setAlarm(startTime:String,endTime:String,date:String) {
+//
+//        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
+//            throwable.printStackTrace()
+//            Log.i("id", "exception")
+//        }
+//        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
+////            val response = Service
+////                .getCurrentWeatherData(lat, log, "minutely", "units", "lang")
+//            withContext(Dispatchers.Main) {
+//
+//                    localData.insert(response.body())
+//                    //  weatherLiveData.postValue(response.body())
+//                }
+//            }
+//        }
+
 
     fun deleteData(timezone: String?) {
         val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
@@ -93,6 +111,30 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
             timezone?.let { localData.deleteWeather(it) }
 
         }
+    }
+
+    fun getAllAlarms(): LiveData<List<Alarm>>{
+        return localData.getAllAlarms()
+    }
+     var local:Long = 0
+    fun insertAlarm(alarm: Alarm): Long {
+
+        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
+            throwable.printStackTrace()
+        }
+        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
+          var  local= localData.insertAlarm(alarm)
+        }
+        return local
+
+    }
+    fun deleteAlarm(id: Int): Unit{
+        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
+            throwable.printStackTrace()
+        }
+        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
+            localData.deleteAlarm(id)
+            }
     }
 
 

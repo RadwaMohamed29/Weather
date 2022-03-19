@@ -3,6 +3,7 @@ package com.example.weather.data.localData
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Dao
+import com.example.weather.model.Alarm
 import com.example.weather.model.WeatherApi
 @Dao
 interface Dao {
@@ -12,9 +13,6 @@ interface Dao {
 
     @Query("SELECT * FROM Weather")
     fun getAllData(): List<WeatherApi>
-
-//    @Query("DELETE FROM Weather")
-//    suspend fun deleteAll(weather: WeatherApi)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(weather:WeatherApi)
@@ -31,12 +29,18 @@ interface Dao {
     @Update
     fun update(weather: WeatherApi)
 
-//    @Delete
-//    suspend fun deleteALL()
 
 
-//    @Query("DELETE FROM Weather")
-//    suspend fun deleteAll()
+    @Query("SELECT * FROM Alarms")
+    fun getAllAlarms(): LiveData<List<Alarm>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAlarm(alarmObj: Alarm): Long
+
+    @Query("DELETE FROM Alarms WHERE id =:id")
+    fun deleteAlarm(id: Int): Unit
+
+
 
 
 

@@ -96,6 +96,5 @@ class MapsFragment : Fragment() {
         })
         //Log.i("maaap", " " + lat + " " + lon)
 
-
     }
 }

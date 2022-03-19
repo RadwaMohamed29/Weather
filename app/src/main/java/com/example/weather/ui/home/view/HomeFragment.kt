@@ -81,13 +81,16 @@ class HomeFragment : Fragment() {
 
 
         if(lat.equals("0")||lon.equals("0")){
-            viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", unit, lang)
+           viewModel.insertData(gps.getLatitude().toString(), gps.getLongitude().toString(),"minutely", unit, lang)
+           // viewModel.insertData("30.5965", "32.2715","minutely", unit, lang)
+
         }else{
             viewModel.insertData(lat, lon,"minutely", unit, lang)
         }
         viewModel.weatherApi.observe(viewLifecycleOwner){
             if(lat.equals("0")||lon.equals("0")){
                 binding.cityName.text=getCityName(gps.getLatitude()!!.toDouble(), gps.getLongitude()!!.toDouble())
+                //binding.cityName.text=getCityName(30.5965, 32.2715)
             }else{
                 binding.cityName.text=getCityName(lat!!.toDouble(), lon!!.toDouble())
             }

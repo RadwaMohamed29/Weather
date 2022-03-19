@@ -37,5 +37,6 @@
     <string name="miles_hour">M/h</string>
     <string name="meter_sec">M/S</string>
     <string name="save">Save</string>
+    <string name="date">Date</string>
 
 </resources>

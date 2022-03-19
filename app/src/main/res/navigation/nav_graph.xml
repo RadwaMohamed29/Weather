@@ -50,6 +50,9 @@
                 android:defaultValue="false" />
 
         </action>
+        <action
+            android:id="@+id/action_settingsFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
 
     </fragment>
     <fragment

@@ -1,6 +1,7 @@
 package com.example.weather.data.localData
 
 import androidx.lifecycle.LiveData
+import com.example.weather.model.Alarm
 import com.example.weather.model.WeatherApi
 
 class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
@@ -30,6 +31,18 @@ class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
 
     override fun update(weatherApi: WeatherApi?) {
         weatherApi?.let { dao.update(it) }
+    }
+
+    override fun getAllAlarms(): LiveData<List<Alarm>> {
+        return dao.getAllAlarms()
+    }
+
+    override suspend fun insertAlarm(alarm: Alarm): Long {
+        return dao.insertAlarm(alarm)
+    }
+
+    override fun deleteAlarm(id: Int) {
+       dao.deleteAlarm(id)
     }
 
 

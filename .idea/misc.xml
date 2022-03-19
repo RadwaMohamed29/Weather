@@ -8,6 +8,8 @@
         <entry key="..\:/Android_projects/Weather/app/src/main/res/drawable/ic_favorite_border_white_24dp.xml" value="0.1605" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/activity_splash.xml" value="0.10572916666666667" />
+        <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/custom_dialog.xml" value="0.20454545454545456" />
+        <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/custom_row_alarm.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/custom_row_day.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/custom_row_fav.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/custom_row_week.xml" value="0.25416666666666665" />
@@ -20,6 +22,7 @@
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/fragment_splash.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/fragment_weather_details.xml" value="0.22135416666666666" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/test.xml" value="0.2" />
+        <entry key="..\:/Android_projects/Weather/app/src/main/res/layout/work_manager_dialoge.xml" value="0.25416666666666665" />
         <entry key="..\:/Android_projects/Weather/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.264" />
       </map>
     </option>
