@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 
 import com.example.weather.databinding.CustomRowAlarmBinding
 import com.example.weather.model.Alarm
@@ -68,6 +69,8 @@ class AlertsAdapter(
 
         holder.myView.deleteBtn.setOnClickListener {
             alartViewModel.deleteAlert(alarmList[position].id)
+            WorkManager.getInstance().cancelAllWorkByTag("${alarmList[position].id}")
+
         }
     }
     override fun getItemCount() = alarmList.size
