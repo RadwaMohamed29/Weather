@@ -25,6 +25,8 @@ class SettingsFragment : Fragment() {
     lateinit var sharedPref: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
     lateinit var viewModel: SettingViewModel
+    lateinit var lat:String
+    lateinit var lon:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,35 +54,48 @@ class SettingsFragment : Fragment() {
         var lang = sharedPref.getString("lang", "en")
         var unit = sharedPref.getString("units", "metric")
         var location = sharedPref.getString("location", "GPS")
+
+        lat = sharedPref?.getString("lat", "0").toString()
+        lon = sharedPref?.getString("lon", "0").toString()
         when (lang) {
             "en" -> binding.enBtn.isChecked = true
             "ar" -> binding.arBtn.isChecked = true
         }
-        when (location) {
-            "GPS" -> binding.radioButtonGps.isChecked = true
-            "Map" -> binding.radioButtonMap.isChecked = true
-        }
+//        when (location) {
+//            "GPS" -> binding.radioButtonGps.isChecked = true
+//            "Map" -> binding.radioButtonMap.isChecked = true
+//        }
+        if(lat=="0"||lon=="0"){
+            binding.radioButtonGps.isChecked = true
+        }else
+        {binding.radioButtonMap.isChecked = true}
         when (unit) {
             "metric" -> binding.cM.isChecked = true
             "imperial" -> binding.fMl.isChecked = true
             "standard" -> binding.kM.isChecked = true
         }
 
-
-       // navController = Navigation.findNavController(view)
         binding.arBtn.setOnClickListener { changeLang("ar") }
         binding.enBtn.setOnClickListener { changeLang("en") }
         binding.radioButtonGps.setOnClickListener {
+            binding.radioButtonMap.isChecked = false
+            editor.putString("lat", "0")
+            editor.putString("lon", "0")
+            editor.apply()
             Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_homeFragment2)}
-        binding.cM.setOnClickListener { changeUnit("metric") }
-        binding.fMl.setOnClickListener { changeUnit("imperial") }
-        binding.kM.setOnClickListener { changeUnit("standard") }
+        binding.cM.setOnClickListener {
+            changeUnit("metric")
+             }
+        binding.fMl.setOnClickListener {
+            changeUnit("imperial")
+             }
+        binding.kM.setOnClickListener {
+            changeUnit("standard")
+             }
         binding.radioButtonMap.setOnClickListener {
-            //navController.navigate(SettingsFragmentDirections.actionSettingsFragmentToMapsFragment())
+            binding.radioButtonGps.isChecked = false
             Navigation.findNavController(view).navigate(R.id.action_settingsFragment_to_mapsFragment)
         }
-
-
     }
 
     fun setLocale(languageCode: String?) {
@@ -100,10 +115,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun restartApp() {
-        val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-        Runtime.getRuntime().exit(0)
+      //  val intent = Intent(context, MainActivity::class.java)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(requireActivity().intent)
+        requireActivity().finish()
+        //Runtime.getRuntime().exit(0)
 
     }
 
