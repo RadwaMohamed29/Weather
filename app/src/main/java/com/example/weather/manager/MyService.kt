@@ -22,7 +22,7 @@ class MyService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
         desc= intent?.getStringExtra("description")!!
-       val notifi= notification.createNotification(desc,"Weather Notification")
+       val notifi= notification.createNotification(desc,"Weather Today")
         startForeground(1,notifi)
 
         if (Settings.canDrawOverlays(this)) {

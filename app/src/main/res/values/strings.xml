@@ -38,5 +38,12 @@
     <string name="meter_sec">M/S</string>
     <string name="save">Save</string>
     <string name="date">Date</string>
+    <string name="Weather">Weather Today</string>
+    <string name="ok">ok</string>
+    <string name="StartDate">Start Date</string>
+    <string name="EndDate">End Date</string>
+    <string name="From">From</string>
+    <string name="To">To</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

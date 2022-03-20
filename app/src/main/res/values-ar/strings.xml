@@ -35,4 +35,12 @@
     <string name="miles_hour">ميللى/ساعه</string>
     <string name="meter_sec">متر/ثانيه</string>
     <string name="save">حفظ</string>
+    <string name="date">التاريخ</string>
+    <string name="Weather">الطقس اليوم</string>
+    <string name="ok">حسنا</string>
+    <string name="StartDate">بداية التاريخ</string>
+    <string name="EndDate">نهاية التاريخ</string>
+    <string name="From">من</string>
+    <string name="To">الى</string>
+    <string name="cancel">اغلاق</string>
 </resources>

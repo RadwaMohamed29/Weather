@@ -59,12 +59,12 @@ class AlertsAdapter(
         holder.myView.title.text = convertToTime(
             alarmList[position].startTime,
             context
-        ).plus(convertToTime(alarmList[position].endTime, context))
+        ).plus("-").plus(convertToTime(alarmList[position].endTime, context))
 
         holder.myView.desc.text = convertToDate(
             alarmList[position].startDate,
             context
-        ).plus(convertToDate(alarmList[position].endDate, context))
+        ).plus("-").plus(convertToDate(alarmList[position].endDate, context))
 
         holder.myView.deleteBtn.setOnClickListener {
             alartViewModel.deleteAlert(alarmList[position].id)
