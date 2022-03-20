@@ -1,5 +1,6 @@
 package com.example.weather
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,22 @@ class MainActivity : AppCompatActivity() {
         //NavigationUI.setupActionBarWithNavController(this,navController)
     }
 
-    override fun onSupportNavigateUp(): Boolean {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                finish()
+                startActivity(intent)
+            }
+        }
+    }
+
+
+        override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController,null)
     }
 }

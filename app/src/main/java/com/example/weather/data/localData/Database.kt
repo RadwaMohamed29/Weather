@@ -1,6 +1,7 @@
 package com.example.weather.data.localData
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -20,6 +21,19 @@ import com.example.weather.model.WeatherApi
 
                 val instance = Room.databaseBuilder(
                     application.applicationContext,
+                    DataBase::class.java,
+                    "weather"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+
+        fun getWeatherDatabase(context: Context): DataBase {
+            return INSTANCE ?: synchronized(this) {
+
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
                     DataBase::class.java,
                     "weather"
                 ).build()

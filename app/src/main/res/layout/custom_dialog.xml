@@ -22,11 +22,11 @@
 
         <TextView
             android:id="@+id/Date"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
+            android:layout_width="186dp"
+            android:layout_height="44dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="Date"
+            android:text="Start Date"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txt_date"
+                android:id="@+id/start_date"
                 android:layout_width="210dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
@@ -44,13 +44,46 @@
                 android:textSize="17sp" />
 
             <ImageButton
-                android:id="@+id/calenderBtn"
+                android:id="@+id/startDateBtn"
                 android:layout_width="149dp"
                 android:layout_height="match_parent"
                 android:background="#00FFFFFF"
                 app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/Datee"
+            android:layout_width="169dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="End Date"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/end_date"
+                android:layout_width="210dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:hint="dd_mm_yy"
+                android:textSize="17sp" />
+
+            <ImageButton
+                android:id="@+id/endDateBtn"
+                android:layout_width="149dp"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -193,13 +226,24 @@
 
             <Button
                 android:id="@+id/add_alarm_btn"
-                android:layout_width="232dp"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="70dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="21dp"
                 android:text="save"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/cancel_btn"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="21dp"
+                android:text="cancel"
                 android:textColor="@color/white" />
         </LinearLayout>
 

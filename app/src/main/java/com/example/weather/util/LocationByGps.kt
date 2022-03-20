@@ -10,13 +10,17 @@ import android.location.Location
 import android.location.LocationManager
 import android.provider.Settings
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.MutableLiveData
 
 class LocationByGps {
     private val REQUEST_LOCATION = 1
     private var locationManager: LocationManager? = null
     private var latitude: String? = null
     private  var longitude:String? = null
+    private var activity:Activity= Activity()
 
 
     fun initPermissions(activity: Activity?) {
@@ -40,8 +44,11 @@ class LocationByGps {
             getLocation(activity)
         }
     }
+ private var location=MutableLiveData<ArrayList<String>>()
+    val locationList=location
 
     private fun getLocation(activity: Activity) {
+        this.activity=activity
         if (ActivityCompat.checkSelfPermission(
                 activity,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -76,10 +83,22 @@ class LocationByGps {
             } else {
                 Toast.makeText(activity, "Can't Get Your Location", Toast.LENGTH_SHORT).show()
             }
+            location.postValue(arrayListOf(latitude!!,longitude!!))
         }
     }
 
-    private fun gpsEnable(activity: Activity) {
+//    private val requestPermissionLauncher: ActivityResultLauncher<String> =
+//       activity. registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+//            if (isGranted) {
+//                getFreshLocation()
+//            } else {
+//                denyPermission.postValue("denied")
+//            }
+//        }
+//    private fun requestPermission() {
+//        requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)}
+
+        private fun gpsEnable(activity: Activity) {
         val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(activity)
         builder.setMessage("Enable GPS").setCancelable(false)
             .setPositiveButton("YES",

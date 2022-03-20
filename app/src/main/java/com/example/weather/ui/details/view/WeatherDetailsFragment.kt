@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,14 +24,9 @@ import com.example.weather.databinding.FragmentWeatherDetailsBinding
 import com.example.weather.model.Repository
 import com.example.weather.ui.details.viewModel.DetailsViewModel
 import com.example.weather.ui.details.viewModel.DetailsViewModelFactory
-import com.example.weather.ui.favorite.viewModel.FavViewModel
 import com.example.weather.ui.home.view.DayAdapter
 import com.example.weather.ui.home.view.WeekAdapter
-import com.example.weather.ui.home.viewModel.HomeViewModel
-import com.example.weather.ui.home.viewModel.HomeViewModelFactory
-import com.example.weather.util.Notification
 import java.util.*
-import kotlin.math.log
 
 
 class WeatherDetailsFragment : Fragment() {

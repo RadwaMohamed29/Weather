@@ -1,6 +1,7 @@
 package com.example.weather.model
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,6 +21,15 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
         fun getInstance(app: Application): Repository {
             return INSTANCE ?: synchronized(this) {
                Repository(LocalDataSource(DataBase.getWeatherDatabase(app).dao()), Service)
+                    .also {
+                        INSTANCE = it
+                    }
+            }
+        }
+
+        fun getInstance(context:Context): Repository {
+            return INSTANCE ?: synchronized(this) {
+                Repository(LocalDataSource(DataBase.getWeatherDatabase(context).dao()), Service)
                     .also {
                         INSTANCE = it
                     }
@@ -45,9 +55,6 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
         return localData.deleteWeather(timezone)
     }
 
-//    override suspend fun deleteWeather(timezone: String) {
-//        return localData.deleteWeather(timezone)
-//    }
 
     override fun update(weatherApi: WeatherApi?) {
         return localData.update(weatherApi)
@@ -84,22 +91,6 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
             }
         }
     }
-//    fun setAlarm(startTime:String,endTime:String,date:String) {
-//
-//        val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
-//            throwable.printStackTrace()
-//            Log.i("id", "exception")
-//        }
-//        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
-////            val response = Service
-////                .getCurrentWeatherData(lat, log, "minutely", "units", "lang")
-//            withContext(Dispatchers.Main) {
-//
-//                    localData.insert(response.body())
-//                    //  weatherLiveData.postValue(response.body())
-//                }
-//            }
-//        }
 
 
     fun deleteData(timezone: String?) {
@@ -117,16 +108,20 @@ class Repository private constructor(private var localData: InterfaceLocalDataSo
         return localData.getAllAlarms()
     }
      var local:Long = 0
-    fun insertAlarm(alarm: Alarm): Long {
+   suspend fun insertAlarm(alarm: Alarm): Long {
 
         val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->
             throwable.printStackTrace()
         }
-        CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
-          var  local= localData.insertAlarm(alarm)
+       val job= CoroutineScope(Dispatchers.IO + exceptionHandlerException).launch {
+            local= localData.insertAlarm(alarm)
         }
+        job.join()
         return local
 
+    }
+    fun getAlarm(id: Int): Alarm{
+        return localData.getAlarm(id)
     }
     fun deleteAlarm(id: Int): Unit{
         val exceptionHandlerException = CoroutineExceptionHandler { _, throwable ->

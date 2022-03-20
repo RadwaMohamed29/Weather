@@ -15,4 +15,5 @@ interface InterfaceLocalDataSource {
     fun getAllAlarms(): LiveData<List<Alarm>>
     suspend fun insertAlarm(alarmObj: Alarm): Long
     fun deleteAlarm(id: Int): Unit
+    fun getAlarm(id: Int): Alarm
 }

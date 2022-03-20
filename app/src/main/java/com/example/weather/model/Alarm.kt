@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Alarms")
 class Alarm(
-    var date: String,
-    var startTime: String,
-    var endTime: String
+    var startDate: Long,
+    var endDate:Long,
+    var startTime: Long,
+    var endTime: Long
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

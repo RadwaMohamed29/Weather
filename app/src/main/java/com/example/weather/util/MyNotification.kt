@@ -1,5 +1,6 @@
 package com.example.weather.util
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -8,9 +9,9 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.example.weather.R
 
-class Notification(context: Context):ContextWrapper(context) {
+class MyNotification(context: Context):ContextWrapper(context) {
      var context:Context = context
-    fun createNotification(body: String?, title: String?) {
+    fun createNotification(body: String?, title: String?) :Notification{
         val notificationManager = context
             .getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(
@@ -31,7 +32,8 @@ class Notification(context: Context):ContextWrapper(context) {
             builder.setChannelId("WEATHER_CHANNEL1")
             notificationManager.createNotificationChannel(channel)
         }
-        notificationManager?.notify(88, builder.build())
+       // notificationManager?.notify(88, builder.build())
+        return builder.build()
     }
 
 

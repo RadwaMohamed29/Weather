@@ -45,5 +45,9 @@ class LocalDataSource (private val dao: Dao) : InterfaceLocalDataSource {
        dao.deleteAlarm(id)
     }
 
+    override fun getAlarm(id: Int): Alarm {
+        return dao.getAlarm(id)
+    }
+
 
 }

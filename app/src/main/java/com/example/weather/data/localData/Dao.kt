@@ -40,6 +40,11 @@ interface Dao {
     @Query("DELETE FROM Alarms WHERE id =:id")
     fun deleteAlarm(id: Int): Unit
 
+    @Query("SELECT * FROM Alarms WHERE id =:id")
+    fun getAlarm(id: Int): Alarm
+
+
+
 
 
 
