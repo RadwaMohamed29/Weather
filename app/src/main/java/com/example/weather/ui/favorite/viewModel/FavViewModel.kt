@@ -16,10 +16,7 @@ class FavViewModel(app:Application):AndroidViewModel(app) {
     fun getAllWeathers(): LiveData<List<WeatherApi>>{
         return repo.getAllWeathers()
     }
-//    fun getByLatLon(lat:String,lon:String) {
-//        return repo.getByLatLon(lat,lon)
-//
-//    }
+
     fun deleteWeatherData(timezone:String){
         repo.deleteData(timezone)
     }

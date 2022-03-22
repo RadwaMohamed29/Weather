@@ -16,8 +16,7 @@ class HomeViewModel(private val repo:Repository):ViewModel() {
     lateinit var sharedPref:SharedPreferences
 
  fun insertData(lat:String,lon:String,exclude:String,units:String,lang:String){
-//     lat=sharedPref.getString("lat","0").toString()
-//     lon=sharedPref.getString("lon","0").toString()
+
      val job=viewModelScope.launch (Dispatchers.IO){
          api=repo.getCurrentWeatherData(lat,lon,exclude,units, lang)
          repo.insert(api)
@@ -28,10 +27,7 @@ class HomeViewModel(private val repo:Repository):ViewModel() {
          weatherApi.postValue(response)
      }
  }
-//    fun weatherData(context: Context, lat: String, lon: String):LiveData<WeatherApi>{
-//        repo.weatherData(context,lat,lon)
-//        return repo.weatherLiveData
-//    }
+
 
 
 
